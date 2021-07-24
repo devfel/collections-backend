@@ -3,7 +3,7 @@
  <img  src="https://devfel.com/imgs/devfel-logo-01.JPG" alt="DevFel"></a>
 </p>
 
-<h1 align="center">Users CRUD</h1>
+<h1 align="center">Games Collection - Backend</h1>
 
 <div align="center">
 
@@ -37,12 +37,12 @@ This project was done using Typescript, Node, Express, Postgres and it utilizes 
 
 With this application the client can access the following routes<br/>
 
-1. findUserWithGamesById → should be able to find user with games list by user's ID. <br/>
-1. findAllUsersOrderedByFirstName → should be able to list users ordered by first name. <br/>
-1. findUserByFullName → should be able to find user by full name. <br/>
-1. findByTitleContaining → should be able find a game by entire or partial given title. <br/>
-1. countAllGames → should be able to get the total count of games. <br/>
-1. findUsersByGameId → should be able to list users who have given game id. <br/>
+1. `findUserWithGamesById` → should be able to find user with games list by user's ID. <br/>
+1. `findAllUsersOrderedByFirstName` → should be able to list users ordered by first name. <br/>
+1. `findUserByFullName` → should be able to find user by full name. <br/>
+1. `findByTitleContaining` → should be able find a game by entire or partial given title. <br/>
+1. `countAllGames` → should be able to get the total count of games. <br/>
+1. `findUsersByGameId` → should be able to list users who have given game id. <br/>
 
 ---
 
