@@ -14,10 +14,20 @@ export class UsersRepository implements IUsersRepository {
   async findUserWithGamesById({
     user_id,
   }: IFindUserWithGamesDTO): Promise<User> {
-    return this.repository.findOneOrFail(user_id);
+    return this.repository.findOneOrFail(
+      { id: user_id },
+      {
+        relations: ["games"],
+      }
+    );
 
-    // // OUTRA OPCAO
-    // const user = await this.repository.findOne(user_id);
+    // // ANOTHER SOLUTION
+    // const user = await this.repository.findOne(
+    //   { id: user_id },
+    //   {
+    //     relations: ["games"],
+    //   }
+    // );
     // if (!user) {
     //   throw new Error("User not found!");
     // }
@@ -33,9 +43,21 @@ export class UsersRepository implements IUsersRepository {
     first_name,
     last_name,
   }: IFindUserByFullNameDTO): Promise<User[] | undefined> {
+    const first_name_upper = first_name.toUpperCase();
+    const last_name_upper = last_name.toUpperCase();
+
     // Complete usando raw query
     return this.repository.query(
-      `SELECT * FROM users HAVING first_name='${first_name}' AND last_name='${last_name}'`
+      `SELECT * FROM users WHERE upper(first_name)='${first_name_upper}' AND upper(last_name)='${last_name_upper}'`
     );
+
+    // //ANOTHER SOLUTION
+    // return this.repository.query(
+    //   `SELECT *
+    //    FROM users
+    //    WHERE upper(first_name) = $1
+    //    AND upper(last_name) = $2`,
+    //   [first_name.toUpperCase(), last_name.toUpperCase()]
+    // );
   }
 }

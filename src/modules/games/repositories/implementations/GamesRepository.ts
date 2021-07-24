@@ -15,9 +15,15 @@ export class GamesRepository implements IGamesRepository {
   async findByTitleContaining(param: string): Promise<Game[]> {
     // Complete usando query builder
     return this.repository
-      .createQueryBuilder("game")
-      .where("game.title like :title", { title: `%${param}%` })
+      .createQueryBuilder("games")
+      .where(`games.title ILIKE '%${param}%'`)
       .getMany();
+
+    // // ANOTHER WAY BUT DOENST WORK FOR THIS CASE
+    // return this.repository
+    //   .createQueryBuilder("game")
+    //   .where("games.title like :title", { title: `%${param}%` })
+    //   .getMany();
   }
 
   async countAllGames(): Promise<[{ count: string }]> {
@@ -33,13 +39,20 @@ export class GamesRepository implements IGamesRepository {
       .of(id)
       .loadMany();
 
-    // //OUTRA FORMA
+    // // ANOTHER WAY
     // const games = await this.repository
     //   .createQueryBuilder("game")
     //   .innerJoinAndSelect("game.users", "user")
     //   .where("game.id = :id", { id })
     //   .getOneOrFail();
-
     // return games.users;
+
+    // // ANOTHER WAY
+    // return this.repository
+    //   .createQueryBuilder("game")
+    //   .leftJoinAndSelect("game.users", "user")
+    //   .where("game.id =  :id", { id })
+    //   .select(["email", "first_name", "last_name"])
+    //   .execute();
   }
 }
